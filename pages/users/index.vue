@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const usersStore = useUsersStore()
 // const test = () => {
 //   console.log(userStore.users)

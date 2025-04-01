@@ -1,21 +1,25 @@
 export type Post = {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-};
+  userId: number
+  id: number
+  title: string
+  body: string
+}
 export type User = {
-  id: number;
-  name: string;
-  email: string;
+  id: number
+  name: string
+  email: string
   address: {
-    city: string;
-  };
-};
+    city: string
+  }
+}
 export type Comment = {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
-};
+  postId: number
+  id: number
+  name: string
+  email: string
+  body: string
+}
+export type Filter = {
+  label: string
+  value: string
+}
