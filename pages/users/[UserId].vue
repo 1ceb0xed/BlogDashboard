@@ -3,32 +3,23 @@ const usersStore = useUsersStore()
 const postsStore = usePostsStore()
 const { UserId } = useRoute().params
 
-const test = () => {
-  console.log(usersStore.usersById)
-}
-onMounted(() => {
-  setTimeout(() => {
-    usersStore.getUserById(Number(UserId))
-    postsStore.getPostById(Number(UserId))
-  }, 500) // тк основные данные не успевают загрузиться
-})
+// const test = () => {
+//   console.log(usersStore)
+// }
 </script>
 <template>
-  <NuxtLink :to="'/users'">Назад</NuxtLink>
-  <br />
-  <button @click="test">test</button>
-  <h2>user id {{ UserId }}</h2>
-  <h2>user name {{ usersStore.usersById?.name }}</h2>
-  <h2>user email {{ usersStore.usersById?.email }}</h2>
+  <VBtn class="mb-[1vw]" :to="'/users'">Back</VBtn>
+  <VCard
+    :title="`User Name: ${usersStore.getUserById(Number(UserId))?.name}`"
+    :subtitle="`User email: ${usersStore.getUserById(Number(UserId))?.email}`"
+  />
   <div class="bg-slate-500 mt-10">
-    <ul>
-      <li v-for="item in postsStore.postById" :key="item.id">
-        <h2 class="text-2xl flex justify-center">Title</h2>
-        <h2 name="title">{{ item.title }}</h2>
-        <h2 class="text-2xl flex justify-center">Body</h2>
-        <h2 name="body">{{ item.body }}</h2>
-        <br />
-      </li>
-    </ul>
+    <div class="p-[1.5vw]" v-for="item in postsStore.getPostById(Number(UserId))" :key="item.id">
+      <VCard
+        :title="`Title: ${item.title}`"
+        subtitle="The main part of the post:"
+        :text="item.body"
+      />
+    </div>
   </div>
 </template>
