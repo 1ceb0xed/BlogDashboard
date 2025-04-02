@@ -1,22 +1,6 @@
 <script setup lang="ts">
-const usersStore = useUsersStore()
-// const test = () => {
-//   console.log(userStore.users)
-// }
+usePostsStore() // тк, если перезагрузить страницу на странице /users а потом перейти на /posts там идет прогрузка данных, тк стор с постами не был задействован
 </script>
 <template>
-  <div>
-    <div class="mb-[20px]" name="card" v-for="item in usersStore.users" :key="item.id">
-      <VCard
-        color="rgb(95, 115, 135)"
-        :title="`Name: ${item.name}`"
-        :subtitle="`Email: ${item.email}`"
-        :text="`City: ${item.address.city}`"
-      >
-        <VCardActions>
-          <VBtn :to="`/users/${item.id}`">Profile</VBtn>
-        </VCardActions>
-      </VCard>
-    </div>
-  </div>
+  <AppUsersCardList />
 </template>

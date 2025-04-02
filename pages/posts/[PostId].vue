@@ -1,6 +1,12 @@
 <script setup lang="ts">
-const { PostId } = useRoute().params
+const loaderPost = ref<boolean>(true)
+onMounted(() => {
+  setTimeout(() => {
+    loaderPost.value = false
+  }, 1000)
+})
 </script>
 <template>
-  <h2>post id {{ PostId }}</h2>
+  <AppLoader v-show="loaderPost" />
+  <AppPostCard v-show="!loaderPost" />
 </template>
