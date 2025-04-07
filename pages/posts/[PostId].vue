@@ -1,12 +1,13 @@
-<script setup lang="ts">
-const loaderPost = ref<boolean>(true)
-onMounted(() => {
-  setTimeout(() => {
-    loaderPost.value = false
-  }, 1000)
+<script setup>
+definePageMeta({
+  middleware: (to) => {
+    const postsStore = usePostsStore()
+    if (!postsStore.posts.some((post) => post.id === Number(to.params.PostId))) {
+      return navigateTo('/posts')
+    }
+  },
 })
 </script>
 <template>
-  <AppLoader v-show="loaderPost" />
-  <AppPostCard v-show="!loaderPost" />
+  <PostCard />
 </template>

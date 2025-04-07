@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Filter, Post } from '~/interfaces/Types'
+import type { Filter, Post } from '~/interfaces/ApiTypes'
 const postsStore = usePostsStore()
 const usersStore = useUsersStore()
 

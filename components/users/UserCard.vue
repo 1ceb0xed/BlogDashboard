@@ -13,7 +13,11 @@ const { UserId } = useRoute().params
     />
     <h2 class="grid justify-center text-2xl mt-[2vw]">Posts</h2>
     <div class="bg-slate-500 mt-10">
-      <div class="p-[1.5vw]" v-for="item in postsStore.getPostsById(Number(UserId))" :key="item.id">
+      <div
+        class="p-[1.5vw]"
+        v-for="item in postsStore.getPostsByUserId(Number(UserId))"
+        :key="item.id"
+      >
         <NuxtLink :to="`/posts/${item.id}`">
           <VCard
             :title="`Title: ${item.title}`"

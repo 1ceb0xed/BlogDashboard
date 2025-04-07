@@ -1,12 +1,13 @@
-<script setup lang="ts">
-const loaderUserCard = ref<boolean>(true)
-onMounted(() => {
-  setTimeout(() => {
-    loaderUserCard.value = false
-  }, 1000)
+<script setup>
+definePageMeta({
+  middleware: (to) => {
+    const usersStore = useUsersStore()
+    if (!usersStore.users.some((user) => user.id === Number(to.params.UserId))) {
+      return navigateTo('/users')
+    }
+  },
 })
 </script>
 <template>
-  <AppLoader v-show="loaderUserCard" />
-  <AppUserCard v-show="!loaderUserCard" />
+  <UserCard />
 </template>
