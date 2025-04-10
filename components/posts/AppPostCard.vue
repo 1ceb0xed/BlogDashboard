@@ -6,6 +6,7 @@ const postsStore = usePostsStore()
 const usersStore = useUsersStore()
 const { PostId } = useRoute().params
 const fetchComments = async (): Promise<void> => {
+  // TODO: start loading
   try {
     const { data } = await axios.get<Comment[]>(
       `https://jsonplaceholder.typicode.com/comments?postId=${PostId}`,
@@ -13,6 +14,8 @@ const fetchComments = async (): Promise<void> => {
     comments.value = data
   } catch {
     alert('Error')
+  } finally {
+    // TODO: finish loading
   }
 }
 onMounted(async () => {
