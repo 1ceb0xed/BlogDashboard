@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import axios from 'axios'
-import type { Comment } from '~/interfaces/Types'
+import type { Comment } from '~/interfaces/ApiTypes'
 const comments = ref<Comment[]>([])
 const postsStore = usePostsStore()
 const usersStore = useUsersStore()
 const { PostId } = useRoute().params
+const isLoading = ref<boolean>()
 const fetchComments = async (): Promise<void> => {
-  // TODO: start loading
+  isLoading.value = true
   try {
     const { data } = await axios.get<Comment[]>(
       `https://jsonplaceholder.typicode.com/comments?postId=${PostId}`,
@@ -15,7 +16,9 @@ const fetchComments = async (): Promise<void> => {
   } catch {
     alert('Error')
   } finally {
-    // TODO: finish loading
+    setTimeout(() => {
+      isLoading.value = false
+    }, 500)
   }
 }
 onMounted(async () => {
@@ -34,7 +37,8 @@ onMounted(async () => {
         ></VCard>
       </div>
       <h2 class="text-2xl justify-start m-[1vw]">Comments</h2>
-      <div name="comments" class="mt-[1.5vw] grid gap-[1vw]">
+      <AppLoader v-show="isLoading" />
+      <div name="comments" class="mt-[1.5vw] grid gap-[1vw]" v-show="!isLoading">
         <VCard
           v-for="comment in comments"
           :key="comment.id"
