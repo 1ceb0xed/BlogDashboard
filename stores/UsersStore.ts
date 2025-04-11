@@ -4,7 +4,7 @@ export const useUsersStore = defineStore('usersStore', () => {
   const users = ref<User[]>([])
   const fetchUsers = async (): Promise<void> => {
     try {
-      const { data } = await axios.get<User[]>('https://jsonplaceholder.typicode.com/users')
+      const { data } = await axios.get<User[]>(useRuntimeConfig().public.USERS_LINK as string)
       users.value = data
     } catch {
       alert('Error')

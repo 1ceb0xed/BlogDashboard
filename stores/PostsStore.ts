@@ -7,7 +7,7 @@ export const usePostsStore = defineStore('postsStore', () => {
   const fetchPosts = async (): Promise<void> => {
     isLoaded.value = false
     try {
-      const { data } = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts')
+      const { data } = await axios.get<Post[]>(useRuntimeConfig().public.POSTS_LINK as string)
       posts.value = data
     } catch {
       alert('Error')
